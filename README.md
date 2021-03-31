@@ -46,23 +46,23 @@ by [Yueming Jin](https://yuemingjin.github.io/), [Yonghao Long](https://scholar.
 
 * Switch folder ``$ cd ./code/Training memory bank model/``
 
-* Run ``$ get_paths_labels.py`` to generate the files needed for the training.
+* Run ``$ get_paths_labels.py`` to generate the files needed for the training
 
-* Run ``$ train_singlenet_phase_1fc.py`` to start the training.
+* Run ``$ train_singlenet_phase_1fc.py`` to start the training
 
 3. Training TMRNet
 
 * Switch folder ``$ cd ./code/Training TMRNet/``
 
-* Put the well-trained model obtained from step 2 to folder ``./LFB/FBmodel/``.
+* Put the well-trained model obtained from step 2 to folder ``./LFB/FBmodel/``
 
-* Run ``$ get_paths_labels.py`` to generate the files needed for the training.
+* Run ``$ get_paths_labels.py`` to generate the files needed for the training
 
 * Set the args 'model_path' in ``train_*.py`` to ``./LFB/FBmodel/{your_model_name}.pth``
 
-* (The first time to run train files) Set the args 'load_LFB' to False to generate the memory bank
+* Run ``$ train_*.py`` to start the training
 
-* Run ``$ train_*.py`` to start the training.
+```Note: In the first time to run train_*.py files, set the args 'load_LFB' to False to generate the memory bank```
 
 
 ### Citation
