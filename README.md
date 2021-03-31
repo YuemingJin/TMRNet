@@ -11,7 +11,7 @@ by [Yueming Jin](https://yuemingjin.github.io/), [Yonghao Long](https://scholar.
 <!-- * The Code contains two parts: motion learning (flow prediction and flow compensation) and semi-supervised segmentation. -->
 
 ### Data Preparation
-* We use the dataset [Cholec80](http://camma.u-strasbg.fr/datasets).
+* We use the dataset [Cholec80](http://camma.u-strasbg.fr/datasets) and [M2CAI 2016 Challenge](http://camma.u-strasbg.fr/datasets).
 
 * The structure of data folder is arranged as follows:
 ```
