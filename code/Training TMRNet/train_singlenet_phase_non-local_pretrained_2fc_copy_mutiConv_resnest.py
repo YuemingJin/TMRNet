@@ -24,7 +24,6 @@ from NLBlock_MutiConv6_3 import NLBlock
 from NLBlock_MutiConv6_3 import TimeConv
 import os
 
-
 parser = argparse.ArgumentParser(description='lstm training')
 parser.add_argument('-g', '--gpu', default=True, type=bool, help='gpu use, default True')
 parser.add_argument('-s', '--seq', default=10, type=int, help='sequence length, default 10')

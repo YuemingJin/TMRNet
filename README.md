@@ -13,8 +13,6 @@ by [Yueming Jin](https://yuemingjin.github.io/), [Yonghao Long](https://scholar.
 ### Data Preparation
 * We use the dataset [Cholec80](http://camma.u-strasbg.fr/datasets).
 
-* Please follow the data preprocessing steps in this [repository](https://github.com/keyuncheng/MF-TAPNet).
-
 * The structure of data folder is arranged as follows:
 ```
 (root folder)
@@ -46,7 +44,7 @@ by [Yueming Jin](https://yuemingjin.github.io/), [Yonghao Long](https://scholar.
 
 2. Training memory bank model
 
-* Go into folder ``$ cd ./code/Training memory bank model/``
+* Switch folder ``$ cd ./code/Training memory bank model/``
 
 * Run ``$ get_paths_labels.py`` to generate the files needed for the training.
 
@@ -54,13 +52,17 @@ by [Yueming Jin](https://yuemingjin.github.io/), [Yonghao Long](https://scholar.
 
 3. Training TMRNet
 
-* Go into folder ``$ cd ./code/Training TMRNet/``
+* Switch folder ``$ cd ./code/Training TMRNet/``
 
 * Put the model obtained from step 2 to folder ``./LFB/FBmodel/``.
 
 * Run ``$ get_paths_labels.py`` to generate the files needed for the training.
 
-* Run ``$ train_singlenet_phase_1fc.py`` to start the training.
+* Set the args 'model_path' in ``train_*.py`` to ``./LFB/FBmodel/{your_model_name}.pth``
+
+* (The first time to run train files) Set the args 'load_LFB' to False to generate the memory bank
+
+* Run ``$ train_*.py`` to start the training.
 
 
 ### Citation
@@ -74,7 +76,8 @@ If this repository is useful for your research, please cite:
     volume={},
     number={},
     pages={1-1},
-    doi={10.1109/TMI.2021.3069471}}
+    doi={10.1109/TMI.2021.3069471}
+}
 ```
 
 ### Questions

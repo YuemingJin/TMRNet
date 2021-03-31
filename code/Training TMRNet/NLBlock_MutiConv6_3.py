@@ -46,6 +46,7 @@ class TimeConv(nn.Module):
         self.timeconv1 = nn.Conv1d(512, 512, kernel_size=3, padding=1)
         self.timeconv2 = nn.Conv1d(512, 512, kernel_size=5, padding=2)
         self.timeconv3 = nn.Conv1d(512, 512, kernel_size=7, padding=3)
+        self.maxpool_m = nn.MaxPool1d(2, stride=1)
         self.maxpool = nn.AdaptiveMaxPool2d((512,1))
 
     def forward(self, x):
@@ -63,10 +64,15 @@ class TimeConv(nn.Module):
         y3 = x3.transpose(1, 2)
         y3 = y3.view(-1,30,512,1)
 
-        y4 = x.transpose(1, 2)
+        x4 = F.pad(x, (1,0), mode='constant', value=0)
+        x4 = self.maxpool_m(x4)
+        y4 = x4.transpose(1, 2)
         y4 = y4.view(-1,30,512,1)
 
-        y = torch.cat((y1,y2,y3,y4), dim=3)
+        y0 = x.transpose(1, 2)
+        y0 = y0.view(-1,30,512,1)
+
+        y = torch.cat((y0,y1,y2,y3,y4), dim=3)
         y = self.maxpool(y)
         y = y.view(-1,30,512)
         
