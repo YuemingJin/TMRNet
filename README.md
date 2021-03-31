@@ -42,7 +42,7 @@ by [Yueming Jin](https://yuemingjin.github.io/), [Yonghao Long](https://scholar.
 - sklearn
 ```
 
-2. Training memory bank model
+2. Training model for building memory bank
 
 * Switch folder ``$ cd ./code/Training memory bank model/``
 
@@ -54,7 +54,7 @@ by [Yueming Jin](https://yuemingjin.github.io/), [Yonghao Long](https://scholar.
 
 * Switch folder ``$ cd ./code/Training TMRNet/``
 
-* Put the model obtained from step 2 to folder ``./LFB/FBmodel/``.
+* Put the well-trained model obtained from step 2 to folder ``./LFB/FBmodel/``.
 
 * Run ``$ get_paths_labels.py`` to generate the files needed for the training.
 
