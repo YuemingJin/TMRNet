@@ -2,10 +2,10 @@
 by [Yueming Jin](https://yuemingjin.github.io/),[Yonghao Long](https://scholar.google.com/citations?user=HIjQdFQAAAAJ&hl=zh-CN), [Cheng Chen](https://scholar.google.com.hk/citations?user=bRe3FlcAAAAJ&hl=en), [Zixu Zhao](https://scholar.google.com.hk/citations?user=GSQY0CEAAAAJ&hl=zh-CN), [Qi Dou](http://www.cse.cuhk.edu.hk/~qdou/), [Pheng-Ann Heng](http://www.cse.cuhk.edu.hk/~pheng/). 
 
 ### Introduction
-* The Pytorch implementation for our TMI 2021 paper '[Temporal Memory Relation Network for Workflow Recognition from Surgical Video](https://arxiv.org/pdf/2007.02501.pdf)'. 
+* The Pytorch implementation for our TMI 2021 paper '[Temporal Memory Relation Network for Workflow Recognition from Surgical Video](https://ieeexplore.ieee.org/document/9389566)'. 
 
 <p align="center">
-  <img src="figure/overview_archi2.png"  width="720"/>
+  <img src="figure/overview_archi2.png"  width="800"/>
 </p>
 
 <!-- * The Code contains two parts: motion learning (flow prediction and flow compensation) and semi-supervised segmentation. -->
@@ -30,6 +30,8 @@ by [Yueming Jin](https://yuemingjin.github.io/),[Yonghao Long](https://scholar.g
 |  |  |  ├── video01-phase.txt
 |  |  |  ├── ......
 |  |  |  ├── video80-phase.txt
+├── code
+|  ├── ......
 
 ```
 
@@ -43,6 +45,11 @@ by [Yueming Jin](https://yuemingjin.github.io/),[Yonghao Long](https://scholar.g
 - numpy
 - sklearn
 ```
+
+2. Building long-range memory bank
+Go into folder ``code/Building long-range memory bank``
+
+
 2. Data preloading:
 * Run ``$ get_paths_labels.py`` to generate the files needed for the .
 
