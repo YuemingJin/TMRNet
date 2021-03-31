@@ -20,6 +20,7 @@ import random
 import numbers
 from torch.utils.tensorboard import SummaryWriter
 from sklearn import metrics
+import os
 
 parser = argparse.ArgumentParser(description='lstm training')
 parser.add_argument('-g', '--gpu', default=True, type=bool, help='gpu use, default True')
@@ -238,26 +239,21 @@ def get_useful_start_idx(sequence_length, list_each_length):
 def get_data(data_path):
     with open(data_path, 'rb') as f:
         train_test_paths_labels = pickle.load(f)
-    train_paths_19 = train_test_paths_labels[0]
-    train_paths_80 = train_test_paths_labels[1]
-    val_paths_19 = train_test_paths_labels[2]
-    train_labels_19 = train_test_paths_labels[3]
-    train_labels_80 = train_test_paths_labels[4]
-    val_labels_19 = train_test_paths_labels[5]
-    train_num_each_19 = train_test_paths_labels[6]
-    train_num_each_80 = train_test_paths_labels[7]
-    val_num_each_19 = train_test_paths_labels[8]
+    train_paths_80 = train_test_paths_labels[0]
+    val_paths_80 = train_test_paths_labels[1]
+    train_labels_80 = train_test_paths_labels[2]
+    val_labels_80 = train_test_paths_labels[3]
+    train_num_each_80 = train_test_paths_labels[4]
+    val_num_each_80 = train_test_paths_labels[5]
 
-    print('train_paths_19  : {:6d}'.format(len(train_paths_19)))
-    print('train_labels_19 : {:6d}'.format(len(train_labels_19)))
     print('train_paths_80  : {:6d}'.format(len(train_paths_80)))
     print('train_labels_80 : {:6d}'.format(len(train_labels_80)))
-    print('valid_paths_19  : {:6d}'.format(len(val_paths_19)))
-    print('valid_labels_19 : {:6d}'.format(len(val_labels_19)))
+    print('valid_paths_19  : {:6d}'.format(len(val_paths_80)))
+    print('valid_labels_19 : {:6d}'.format(len(val_labels_80)))
 
     train_labels_19 = np.asarray(train_labels_19, dtype=np.int64)
     train_labels_80 = np.asarray(train_labels_80, dtype=np.int64)
-    val_labels_19 = np.asarray(val_labels_19, dtype=np.int64)
+    val_labels_80 = np.asarray(val_labels_80, dtype=np.int64)
 
     train_transforms = None
     test_transforms = None
@@ -320,13 +316,11 @@ def get_data(data_path):
                     [transforms.Normalize([0.41757566,0.26098573,0.25888634],[0.21938758,0.1983,0.19342837])(crop) for crop in crops]))
         ])
 
-    train_dataset_19 = CholecDataset(train_paths_19, train_labels_19, train_transforms)
     train_dataset_80 = CholecDataset(train_paths_80, train_labels_80, train_transforms)
-    val_dataset_19 = CholecDataset(val_paths_19, val_labels_19, test_transforms)
+    val_dataset_80 = CholecDataset(val_paths_80, val_labels_80, test_transforms)
 
-    return train_dataset_19, train_num_each_19,\
-           train_dataset_80, train_num_each_80, \
-           val_dataset_19, val_num_each_19
+    return train_dataset_80, train_num_each_80, \
+           val_dataset_80, val_num_each_80
 
 
 # 序列采样sampler
@@ -378,20 +372,17 @@ def train_model(train_dataset, train_num_each, val_dataset, val_num_each):
     # TensorBoard
     writer = SummaryWriter('runs/lr5e-4_do/')
 
-    (train_dataset_19, train_dataset_80),\
-    (train_num_each_19, train_num_each_80),\
+    (train_dataset_80),\
+    (train_num_each_80),\
     (val_dataset),\
     (val_num_each) = train_dataset, train_num_each, val_dataset, val_num_each
 
-    train_useful_start_idx_19 = get_useful_start_idx(sequence_length, train_num_each_19)
     train_useful_start_idx_80 = get_useful_start_idx(sequence_length, train_num_each_80)
     val_useful_start_idx = get_useful_start_idx(sequence_length, val_num_each)
 
-    num_train_we_use_19 = len(train_useful_start_idx_19)
     num_train_we_use_80 = len(train_useful_start_idx_80)
     num_val_we_use = len(val_useful_start_idx)
 
-    train_we_use_start_idx_19 = train_useful_start_idx_19
     train_we_use_start_idx_80 = train_useful_start_idx_80
     val_we_use_start_idx = val_useful_start_idx
 
@@ -410,7 +401,6 @@ def train_model(train_dataset, train_num_each, val_dataset, val_num_each):
     num_train_all = len(train_idx)
     num_val_all = len(val_idx)
 
-    print('num train start idx 19: {:6d}'.format(len(train_useful_start_idx_19)))
     print('num train start idx 80: {:6d}'.format(len(train_useful_start_idx_80)))
     print('num of all train use: {:6d}'.format(num_train_all))
     print('num of all valid use: {:6d}'.format(num_val_all))
@@ -635,7 +625,6 @@ def train_model(train_dataset, train_num_each, val_dataset, val_num_each):
                       val_average_loss_phase,
                       val_accuracy_phase))
 
-
         print("val_precision_each_phase:", val_precision_each_phase)
         print("val_recall_each_phase:", val_recall_each_phase)
         print("val_precision_phase", val_precision_phase)
@@ -679,16 +668,13 @@ def train_model(train_dataset, train_num_each, val_dataset, val_num_each):
 
 
 
-
-
 def main():
-    train_dataset_19, train_num_each_19, \
     train_dataset_80, train_num_each_80, \
-    val_dataset_19, val_num_each_19 = get_data('./train_val_paths_labels.pkl')
-    train_model((train_dataset_19,train_dataset_80),
-                (train_num_each_19,train_num_each_80),
-                (val_dataset_19),
-                (val_num_each_19))
+    val_dataset_80, val_num_each_80 = get_data('./train_val_paths_labels.pkl')
+    train_model((train_dataset_80),
+                (train_num_each_80),
+                (val_dataset_80),
+                (val_num_each_80))
 
 
 if __name__ == "__main__":

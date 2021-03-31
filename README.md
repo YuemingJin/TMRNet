@@ -1,8 +1,8 @@
 # Temporal Memory Relation Network for Workflow Recognition from Surgical Video
-by [Yueming Jin](https://yuemingjin.github.io/),[Yonghao Long](https://scholar.google.com/citations?user=HIjQdFQAAAAJ&hl=zh-CN), [Cheng Chen](https://scholar.google.com.hk/citations?user=bRe3FlcAAAAJ&hl=en), [Zixu Zhao](https://scholar.google.com.hk/citations?user=GSQY0CEAAAAJ&hl=zh-CN), [Qi Dou](http://www.cse.cuhk.edu.hk/~qdou/), [Pheng-Ann Heng](http://www.cse.cuhk.edu.hk/~pheng/). 
+by [Yueming Jin](https://yuemingjin.github.io/), [Yonghao Long](https://scholar.google.com/citations?user=HIjQdFQAAAAJ&hl=zh-CN), [Cheng Chen](https://scholar.google.com.hk/citations?user=bRe3FlcAAAAJ&hl=en), [Zixu Zhao](https://scholar.google.com.hk/citations?user=GSQY0CEAAAAJ&hl=zh-CN), [Qi Dou](http://www.cse.cuhk.edu.hk/~qdou/), [Pheng-Ann Heng](http://www.cse.cuhk.edu.hk/~pheng/). 
 
 ### Introduction
-* The Pytorch implementation for our TMI 2021 paper '[Temporal Memory Relation Network for Workflow Recognition from Surgical Video](https://ieeexplore.ieee.org/document/9389566)'. 
+* The Pytorch implementation for our TMI 2021 paper '[Temporal Memory Relation Network for Workflow Recognition from Surgical Video](https://arxiv.org/abs/2103.16327)'. 
 
 <p align="center">
   <img src="figure/overview_archi2.png"  width="800"/>
@@ -32,9 +32,7 @@ by [Yueming Jin](https://yuemingjin.github.io/),[Yonghao Long](https://scholar.g
 |  |  |  ├── video80-phase.txt
 ├── code
 |  ├── ......
-
 ```
-
 
 ### Setup & Usage for the Code
 
@@ -46,30 +44,37 @@ by [Yueming Jin](https://yuemingjin.github.io/),[Yonghao Long](https://scholar.g
 - sklearn
 ```
 
-2. Building long-range memory bank
-Go into folder ``code/Building long-range memory bank``
+2. Training memory bank model
 
+* Go into folder ``$ cd ./code/Training memory bank model/``
 
-2. Data preloading:
-* Run ``$ get_paths_labels.py`` to generate the files needed for the .
+* Run ``$ get_paths_labels.py`` to generate the files needed for the training.
 
-3. Semi-supervised segmentation (./segmentation/):
-```
-$ bash train.sh
-```
-Note: You may try other models from /Models/plane_model.py
+* Run ``$ train_singlenet_phase_1fc.py`` to start the training.
+
+3. Training TMRNet
+
+* Go into folder ``$ cd ./code/Training TMRNet/``
+
+* Put the model obtained from step 2 to folder ``./LFB/FBmodel/``.
+
+* Run ``$ get_paths_labels.py`` to generate the files needed for the training.
+
+* Run ``$ train_singlenet_phase_1fc.py`` to start the training.
+
 
 ### Citation
 If this repository is useful for your research, please cite:
 ```
-@inproceedings{zhao2020learning,
-  title={Learning Motion Flows for Semi-supervised Instrument Segmentation from Robotic Surgical Video},
-  author={Zhao, Zixu and Jin, Yueming and Gao, Xiaojie and Dou, Qi and Heng, Pheng-Ann},
-  booktitle={International Conference on Medical Image Computing and Computer-Assisted Intervention},
-  pages={679--689},
-  year={2020},
-  organization={Springer}
-}
+@ARTICLE{9389566,
+    author={Y. {Jin} and Y. {Long} and C. {Chen} and Z. {Zhao} and Q. {Dou} and P. -A. {Heng}},
+    journal={IEEE Transactions on Medical Imaging}, 
+    title={Temporal Memory Relation Network for Workflow Recognition from Surgical Video}, 
+    year={2021},
+    volume={},
+    number={},
+    pages={1-1},
+    doi={10.1109/TMI.2021.3069471}}
 ```
 
 ### Questions

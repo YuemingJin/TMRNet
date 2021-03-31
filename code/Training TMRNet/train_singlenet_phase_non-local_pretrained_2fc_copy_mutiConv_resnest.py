@@ -22,6 +22,7 @@ from torch.utils.tensorboard import SummaryWriter
 from sklearn import metrics
 from NLBlock_MutiConv6_3 import NLBlock
 from NLBlock_MutiConv6_3 import TimeConv
+import os
 
 
 parser = argparse.ArgumentParser(description='lstm training')
@@ -44,7 +45,9 @@ parser.add_argument('--sgdadjust', default=1, type=int, help='sgd method adjust 
 parser.add_argument('--sgdstep', default=5, type=int, help='number of steps to adjust lr for sgd, default 5')
 parser.add_argument('--sgdgamma', default=0.1, type=float, help='gamma of steps to adjust lr for sgd, default 0.1')
 parser.add_argument('--LFB_l', default=30, type=int, help='long term feature bank length')
+
 parser.add_argument('--load_LFB', default=True, type=bool, help='whether load exist long term feature bank')
+parser.add_argument('--model_path', default='./LFB/FBmodel/x.pth', type=str, help='the path of the memory bank model')
 
 args = parser.parse_args()
 
@@ -557,7 +560,7 @@ def train_model(train_dataset, train_num_each, val_dataset, val_num_each):
 
         model_LFB = resnet_lstm_LFB()
 
-        model_LFB.load_state_dict(torch.load("./LFB/FBmodel/lstm_epoch_12_length_10_opt_0_mulopt_1_flip_1_crop_1_batch_400_train_9989_val_8839.pth"), strict=False)
+        model_LFB.load_state_dict(torch.load(args.model_path), strict=False)
 
         if use_gpu:
             model_LFB = DataParallel(model_LFB)
@@ -628,7 +631,7 @@ def train_model(train_dataset, train_num_each, val_dataset, val_num_each):
 
     model = resnet_lstm()
 
-    model.load_state_dict(torch.load("./LFB/FBmodel/lstm_epoch_12_length_10_opt_0_mulopt_1_flip_1_crop_1_batch_400_train_9989_val_8839.pth"), strict=False)
+    model.load_state_dict(torch.load(args.model_path), strict=False)
        
     if use_gpu:
         model = DataParallel(model)
@@ -851,9 +854,9 @@ def train_model(train_dataset, train_num_each, val_dataset, val_num_each):
         val_recall_each_phase = metrics.recall_score(val_all_labels_phase,val_all_preds_phase, average=None)
 
         writer.add_scalar('validation acc epoch phase',
-                          float(val_accuracy_phase),epoch)
+                          float(val_accuracy_phase), epoch)
         writer.add_scalar('validation loss epoch phase',
-                          float(val_average_loss_phase),epoch)
+                          float(val_average_loss_phase), epoch)
 
         print('epoch: {:4d}'
               ' train in: {:2.0f}m{:2.0f}s'
@@ -871,7 +874,6 @@ def train_model(train_dataset, train_num_each, val_dataset, val_num_each):
                       val_elapsed_time % 60,
                       val_average_loss_phase,
                       val_accuracy_phase))
-
 
         print("val_precision_each_phase:", val_precision_each_phase)
         print("val_recall_each_phase:", val_recall_each_phase)
