@@ -77,8 +77,9 @@ by [Yueming Jin](https://yuemingjin.github.io/), [Yonghao Long](https://scholar.
 
 * Run ``$ train_*.py`` to start the training
 
-   ```Note: In the first time to run train_*.py files, set the args 'load_LFB' to False to generate the memory bank
-   We have three configurations in train_*.py:
+   ```
+   Note: In the first time to run train_*.py files, set the args 'load_LFB' to False to generate the memory bank
+   We have three configurations about train_*.py:
    1.train_only_non-local_pretrained.py: only capture long-range temporal pattern (ResNet);
    2.train_non-local_mutiConv_resnet.py: capture long-range multi-scale temporal pattern (ResNet);
    3.train_non-local_mutiConv_resnest.py: capture long-range multi-scale temporal pattern (ResNeSt), achieving the best results.
