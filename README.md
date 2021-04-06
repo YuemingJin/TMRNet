@@ -85,7 +85,18 @@ by [Yueming Jin](https://yuemingjin.github.io/), [Yonghao Long](https://scholar.
   ```
 ## Testing
 
+Our trained models can be downloaded from [Dropbox](https://www.dropbox.com/sh/4usgwrthboa3shq/AAC4S-fuQswq7usdPNq6q5yHa?dl=0).
 
+* Switch folder ``$ cd ./code/eval/python/``
+* Run ``$ get_paths_labels.py`` to generate the files needed for the testing
+* Specify the feature bank path, model path and test file path in ./test_*.py
+* Run ./test_*.py to generate results.
+* Run ./export_phase_copy.py to export results as txt files.
+
+We use the evaluation protocol of M2CAI challenge for evaluating our method.
+
+* Switch folder ``$ cd ./code/eval/matlab-phase/code/``
+* Run matlab files ./Main_*.m to evaluate and print the result.
 
 ## Citation
 If this repository is useful for your research, please cite:
