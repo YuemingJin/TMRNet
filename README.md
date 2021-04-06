@@ -95,7 +95,7 @@ Our trained models can be downloaded from [Dropbox](https://www.dropbox.com/sh/4
 
 We use the evaluation protocol of M2CAI challenge for evaluating our method.
 
-* Switch folder ``$ cd ./code/eval/matlab-phase/code/``
+* Switch folder ``$ cd ./code/eval/result/matlab-eval/``
 * Run matlab files ./Main_*.m to evaluate and print the result.
 
 ## Citation
