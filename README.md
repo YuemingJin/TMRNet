@@ -101,15 +101,14 @@ We use the evaluation protocol of M2CAI challenge for evaluating our method.
 ## Citation
 If this repository is useful for your research, please cite:
 ```
-@ARTICLE{9389566,
-    author={Y. {Jin} and Y. {Long} and C. {Chen} and Z. {Zhao} and Q. {Dou} and P. -A. {Heng}},
-    journal={IEEE Transactions on Medical Imaging}, 
-    title={Temporal Memory Relation Network for Workflow Recognition from Surgical Video}, 
-    year={2021},
-    volume={},
-    number={},
-    pages={1-1},
-    doi={10.1109/TMI.2021.3069471}
+@ARTICLE{9389566,  
+  author={Jin, Yueming and Long, Yonghao and Chen, Cheng and Zhao, Zixu and Dou, Qi and Heng, Pheng-Ann},  
+  journal={IEEE Transactions on Medical Imaging},   
+  title={Temporal Memory Relation Network for Workflow Recognition From Surgical Video},   year={2021},  
+  volume={40},  
+  number={7},  
+  pages={1911-1923},  
+  doi={10.1109/TMI.2021.3069471}
 }
 ```
 
