@@ -20,7 +20,10 @@ by [Yueming Jin](https://yuemingjin.github.io/), [Yonghao Long](https://scholar.
 * Data Preprocessing: 
 1. Using [FFmpeg](https://www.ffmpeg.org/download.html) to convert the videos to frames; 
 2. Downsample 25fps to 1fps (Or can directly set the convert frequency number as 1 fps in the previous step); 
-3. Cut the black margin existed in the frame;
+3. Cut the black margin existed in the frame using the function of ``change_size()`` in ``video2frame_cutmargin.py``;
+```
+Note: You also can directly use ``video2frame_cutmargin.py`` for step 1&3, you will obtain the cutted frames with original fps.
+```
 4. Resize original frame to the resolution of 250 * 250.
 
 * The structure of data folder is arranged as follows:
