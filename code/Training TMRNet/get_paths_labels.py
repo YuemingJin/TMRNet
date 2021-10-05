@@ -103,7 +103,7 @@ train_num_each_80 = []
 val_num_each_80 = []
 test_num_each_80 = []
 
-for i in range(40):
+for i in range(32):
     train_num_each_80.append(len(all_info_80[i]))
     for j in range(len(all_info_80[i])):
         train_file_paths_80.append(all_info_80[i][j][0])
@@ -112,7 +112,7 @@ for i in range(40):
 print(len(train_file_paths_80))
 print(len(train_labels_80))
 
-for i in range(40,48):
+for i in range(32,40):
     val_num_each_80.append(len(all_info_80[i]))
     for j in range(len(all_info_80[i])):
         val_file_paths_80.append(all_info_80[i][j][0])
